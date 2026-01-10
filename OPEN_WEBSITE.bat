@@ -1,0 +1,3 @@
+@echo off
+echo Opening Ken Anderson Realty Website...
+start "" "index.html"
