@@ -888,6 +888,22 @@ select {
     background: var(--gradient-dark);
 }
 
+/* Hide all text within Unicorn Studio */
+.unicorn-divider * {
+    color: transparent !important;
+    font-size: 0 !important;
+}
+
+.unicorn-divider text,
+.unicorn-divider span,
+.unicorn-divider p,
+.unicorn-divider div[class*="text"],
+.unicorn-divider a {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
 .unicorn-overlay {
     position: absolute;
     inset: 0;
