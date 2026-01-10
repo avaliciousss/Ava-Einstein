@@ -1,0 +1,19 @@
+PLACE KEN ANDERSON'S PORTRAIT HERE
+
+File name: ken-anderson.jpg
+Recommended specs:
+- Format: JPG or PNG
+- Dimensions: 2000x2500px (portrait orientation)
+- Size: Under 500KB (optimized)
+- Style: Studio-lit, neutral background, professional
+- Treatment: Will be converted to B&W with color on hover
+
+The image you provided (the portrait of Ken Anderson) should be saved here as "ken-anderson.jpg"
+
+For property images, create a subdirectory:
+/images/properties/
+
+And place individual property photos there with descriptive names like:
+- valprato-ct-exterior.jpg
+- briggs-avenue-lot.jpg
+- bearded-oaks-living-room.jpg
