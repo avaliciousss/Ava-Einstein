@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ claude/improve-website-design-pAy1D ]
+    branches: [ claude/ken-anderson-realestate-site-bFnCr ]
 
 permissions:
   contents: read

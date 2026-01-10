@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ken Anderson - Sarasota Real Estate Agent with The Furlan Group. Data-driven luxury real estate without the typical Florida fanfare. $20M+ annual volume, 462+ transactions.">
-    <meta name="keywords" content="Sarasota real estate agent, luxury homes Sarasota, Sarasota realtor, Ken Anderson, The Furlan Group">
-    <title>Ken Anderson | Sarasota Real Estate | The Furlan Group</title>
+    <meta name="description" content="Ken Anderson - Sarasota Real Estate Refined. The Furlan Group at Keller Williams Coastal Living III. Data-driven luxury real estate without the typical Florida fanfare. $20M+ annual volume, 462+ transactions.">
+    <meta name="keywords" content="Sarasota real estate, luxury homes Sarasota, Sarasota realtor, Ken Anderson, The Furlan Group, Keller Williams, Venice FL, Nokomis">
+    <title>Ken Anderson | Sarasota Real Estate Refined | The Furlan Group</title>
 
-    <!-- Google Fonts -->
+    <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Fonts: Playfair Display + DM Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Schema Markup -->
+    <!-- Schema Markup for SEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -28,33 +30,42 @@
         "@type": "PostalAddress",
         "streetAddress": "2001 Siesta Drive, Suite 202",
         "addressLocality": "Sarasota",
-        "addressRegion": "FL"
+        "addressRegion": "FL",
+        "postalCode": "34239"
       },
       "memberOf": {
         "@type": "Organization",
-        "name": "The Furlan Group | Keller Williams Coastal Living III"
+        "name": "The Furlan Group",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Keller Williams Coastal Living III"
+        }
       }
     }
     </script>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar">
+    <!-- ================================
+         NAVIGATION - Fixed Glassmorphic
+         ================================ -->
+    <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-content">
                 <div class="logo">
                     <span class="logo-name">KEN ANDERSON</span>
-                    <span class="logo-subtitle">THE FURLAN GROUP</span>
+                    <span class="logo-subtitle">REALTOR</span>
                 </div>
-                <ul class="nav-menu">
-                    <li><a href="#properties">Properties</a></li>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#properties">Properties</a></li>
                     <li><a href="#market">Market</a></li>
+                    <li><a href="#process">Process</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="#contact" class="nav-cta">Schedule Consultation</a></li>
                 </ul>
-                <button class="mobile-menu-toggle">
+                <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Toggle mobile menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -63,232 +74,547 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- ================================
+         HERO SECTION - Full Viewport
+         ================================ -->
     <section class="hero" id="home">
         <div class="hero-background">
-            <!-- Unicorn Studio Animation -->
-            <div data-us-project="nRNhOTWhT5SmiKQxf26d" class="unicorn-animation"></div>
+            <!-- Background image will be set in CSS -->
+            <div class="hero-bg-image"></div>
         </div>
         <div class="hero-overlay"></div>
         <div class="container hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">Sarasota Real Estate. Refined.</h1>
-                <p class="hero-subtitle">Ken Anderson with The Furlan Group delivers market expertise without the typical Florida fanfare.</p>
+                <p class="hero-label">SARASOTA · FLORIDA · REAL ESTATE</p>
+                <h1 class="hero-title">
+                    <span class="hero-title-line">Sarasota Real Estate.</span>
+                    <span class="hero-title-line">Refined.</span>
+                </h1>
+                <p class="hero-subtitle">Ken Anderson with The Furlan Group delivers market expertise<br>without the typical Florida fanfare.</p>
 
                 <!-- Search Bar -->
-                <div class="search-bar">
-                    <input type="text" placeholder="Search by location..." class="search-input">
+                <div class="search-bar glass">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12.5 12.5L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <input type="text" placeholder="Search by location, price, or property type..." class="search-input">
                     <button class="search-button">Search</button>
                 </div>
 
                 <!-- CTAs -->
                 <div class="hero-ctas">
-                    <a href="#properties" class="btn btn-primary">View Available Properties</a>
+                    <a href="#properties" class="btn btn-primary">View Properties</a>
                     <a href="#contact" class="btn btn-secondary">Schedule Consultation</a>
                 </div>
             </div>
         </div>
         <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- ================================
+         STATISTICS BAR - Animated
+         ================================ -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="26">0</div>
+                    <div class="stat-label">Years Combined<br>Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="20" data-prefix="$" data-suffix="M+">$0M+</div>
+                    <div class="stat-label">Volume<br>2024</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="462" data-suffix="+">0+</div>
+                    <div class="stat-label">Transactions<br>Closed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="45" data-suffix="+">0+</div>
+                    <div class="stat-label">5-Star<br>Reviews</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+         ABOUT KEN - Split Screen
+         ================================ -->
     <section class="about" id="about">
         <div class="container">
             <div class="about-grid">
-                <div class="about-image">
+                <div class="about-image reveal">
                     <div class="image-wrapper">
-                        <img src="images/ken-anderson.jpg" alt="Ken Anderson - Sarasota Real Estate Agent">
-                        <div class="image-accent"></div>
+                        <img src="images/ken-anderson.jpg" alt="Ken Anderson - Sarasota Realtor with The Furlan Group" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22800%22%3E%3Crect fill=%22%23B8860B%22 width=%22600%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2232%22 fill=%22%23FAFAFA%22%3EKEN ANDERSON%3C/text%3E%3C/svg%3E'">
+                        <div class="image-badge glass">
+                            <span class="badge-dot"></span>
+                            Available Now
+                        </div>
                     </div>
                 </div>
-                <div class="about-content">
-                    <span class="section-label">About</span>
+                <div class="about-content reveal">
+                    <span class="section-label">ABOUT</span>
                     <h2 class="section-title">Experience. Without the ego.</h2>
-                    <p class="about-text">Ken Anderson joined The Furlan Group in 2024, bringing precision and dedication to one of Sarasota's most data-driven teams. Led by Brandi Furlan's 26 years of market mastery, we close $20M+ annually by focusing on what matters: accurate pricing, strategic marketing, and transparent communication.</p>
-                    <div class="stats-row">
-                        <span class="stat">26 Years Combined Experience</span>
-                        <span class="stat-divider">|</span>
-                        <span class="stat">462+ Transactions</span>
-                        <span class="stat-divider">|</span>
-                        <span class="stat">$20M+ Volume</span>
+                    <div class="about-text">
+                        <p>Ken Anderson joined The Furlan Group in 2024, bringing precision and dedication to one of Sarasota's most data-driven real estate teams. Led by Brandi Furlan's 26+ years of market mastery, the team closes $20M+ annually by focusing on what matters: accurate pricing, strategic marketing, and transparent communication.</p>
+
+                        <p>As part of Keller Williams Coastal Living III—powered by PLACE—Ken combines cutting-edge technology with personalized service to deliver exceptional results for buyers and sellers across Sarasota, Venice, Bradenton, and beyond.</p>
                     </div>
+
+                    <!-- Stats Row -->
+                    <div class="stats-mini-grid">
+                        <div class="mini-stat-card glass">
+                            <div class="mini-stat-value">26+</div>
+                            <div class="mini-stat-label">Years Combined Exp.</div>
+                        </div>
+                        <div class="mini-stat-card glass">
+                            <div class="mini-stat-value">462+</div>
+                            <div class="mini-stat-label">Transactions</div>
+                        </div>
+                        <div class="mini-stat-card glass">
+                            <div class="mini-stat-value">$20M+</div>
+                            <div class="mini-stat-label">Volume 2024</div>
+                        </div>
+                    </div>
+
                     <a href="#process" class="text-link">Our Approach →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Listings Section -->
-    <section class="listings" id="properties">
+    <!-- ================================
+         FEATURED PROPERTIES - Bento Grid
+         ================================ -->
+    <section class="properties" id="properties">
         <div class="container">
-            <span class="section-label">Current Listings</span>
-            <div class="listings-grid">
-                <!-- Listing Card 1 -->
-                <div class="listing-card">
-                    <div class="listing-image">
-                        <div class="placeholder-image" style="background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);"></div>
-                    </div>
-                    <div class="listing-info">
-                        <div class="listing-price">$775,000</div>
-                        <div class="listing-address">20830 Valprato Ct, Venice</div>
-                        <div class="listing-specs">4 BD · 3 BA · 2,365 SQFT</div>
-                        <a href="#" class="listing-link">View Details →</a>
+            <div class="section-header reveal">
+                <span class="section-label">CURRENT LISTINGS</span>
+                <div class="section-header-row">
+                    <h2 class="section-title">Discover Your Next Investment</h2>
+                    <a href="#contact" class="text-link desktop-only">View All Properties →</a>
+                </div>
+                <p class="section-subtitle">Explore our curated selection of Sarasota's finest properties.</p>
+            </div>
+
+            <!-- Bento Grid Layout -->
+            <div class="bento-grid reveal-stagger">
+                <!-- Large Featured Property 1 -->
+                <div class="property-card featured">
+                    <div class="property-image">
+                        <div class="property-image-bg" style="background: linear-gradient(135deg, #1A1A2E 0%, #2D2D44 100%);"></div>
+                        <div class="property-badge">FOR SALE</div>
+                        <div class="property-overlay glass">
+                            <div class="property-info">
+                                <div class="property-price">$775,000</div>
+                                <div class="property-address">20830 Valprato Ct, Venice</div>
+                                <div class="property-specs">4 BD · 3 BA · 2,365 SQFT</div>
+                                <a href="#contact" class="property-link">View Details →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Listing Card 2 -->
-                <div class="listing-card">
-                    <div class="listing-image">
-                        <div class="placeholder-image" style="background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);"></div>
-                    </div>
-                    <div class="listing-info">
-                        <div class="listing-price">$650,000</div>
-                        <div class="listing-address">Lots 7 & 8 S Briggs Avenue, Sarasota</div>
-                        <div class="listing-specs">BUILD-READY · PRIME LOCATION</div>
-                        <a href="#" class="listing-link">View Details →</a>
+                <!-- Property 2 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <div class="property-image-bg" style="background: linear-gradient(135deg, #B8860B 0%, #C9A050 100%);"></div>
+                        <div class="property-badge">BUILD-READY</div>
+                        <div class="property-overlay glass">
+                            <div class="property-info">
+                                <div class="property-price">$650,000</div>
+                                <div class="property-address">Lots 7 & 8 S Briggs Ave</div>
+                                <div class="property-specs">BUILD-READY · PRIME LOCATION</div>
+                                <a href="#contact" class="property-link">View Details →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Listing Card 3 -->
-                <div class="listing-card">
-                    <div class="listing-image">
-                        <div class="placeholder-image" style="background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);"></div>
-                    </div>
-                    <div class="listing-info">
-                        <div class="listing-price">$1,200,000</div>
-                        <div class="listing-address">331 Bearded Oaks Circle, Sarasota</div>
-                        <div class="listing-specs">5 BD · 4 BA · 3,800 SQFT</div>
-                        <a href="#" class="listing-link">View Details →</a>
+                <!-- Property 3 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <div class="property-image-bg" style="background: linear-gradient(135deg, #2C3E50 0%, #4CA1AF 100%);"></div>
+                        <div class="property-badge">PREMIUM</div>
+                        <div class="property-overlay glass">
+                            <div class="property-info">
+                                <div class="property-price">$1,200,000</div>
+                                <div class="property-address">331 Bearded Oaks Circle</div>
+                                <div class="property-specs">5 BD · 4 BA · 3,800 SQFT</div>
+                                <a href="#contact" class="property-link">View Details →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Property 4 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <div class="property-image-bg" style="background: linear-gradient(135deg, #834D2B 0%, #A0522D 100%);"></div>
+                        <div class="property-badge">MULTI-UNIT</div>
+                        <div class="property-overlay glass">
+                            <div class="property-info">
+                                <div class="property-price">$850,000</div>
+                                <div class="property-address">234/236 Colonia Lane E</div>
+                                <div class="property-specs">MULTI-UNIT · INVESTMENT</div>
+                                <a href="#contact" class="property-link">View Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property 5 - Wide -->
+                <div class="property-card wide">
+                    <div class="property-image">
+                        <div class="property-image-bg" style="background: linear-gradient(135deg, #1A1A2E 0%, #B8860B 50%, #1A1A2E 100%);"></div>
+                        <div class="property-badge">LUXURY</div>
+                        <div class="property-overlay glass">
+                            <div class="property-info">
+                                <div class="property-price">$1,450,000</div>
+                                <div class="property-address">Waterfront Estate, Sarasota</div>
+                                <div class="property-specs">6 BD · 5 BA · 4,200 SQFT · DOCK</div>
+                                <a href="#contact" class="property-link">View Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-cta mobile-only">
+                <a href="#contact" class="text-link">View All Properties →</a>
             </div>
         </div>
     </section>
 
-    <!-- Market Intelligence Section -->
+    <section class="unicorn-divider">
+        <div class="unicorn-overlay"></div>
+        <div data-us-project="nRNhOTWhT5SmiKQxf26d" style="width:100%; height: 300px;"></div>
+    </section>
+
+    <!-- ================================
+         MARKET INTELLIGENCE - Data Dashboard
+         ================================ -->
     <section class="market" id="market">
         <div class="container">
-            <span class="section-label">Market Intelligence</span>
-            <div class="market-grid">
-                <div class="market-card">
+            <div class="section-header reveal">
+                <span class="section-label">MARKET INTELLIGENCE</span>
+                <h2 class="section-title">Sarasota Market Pulse</h2>
+                <p class="section-subtitle">Real-time insights for informed decisions.</p>
+            </div>
+
+            <!-- Data Cards -->
+            <div class="market-cards reveal-stagger">
+                <div class="market-card glass-dark">
                     <div class="market-value">$775K</div>
-                    <div class="market-trend positive">+12%</div>
-                    <div class="market-label">12-Month Trend</div>
+                    <div class="market-trend positive">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 2L8 14M8 2L3 7M8 2L13 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        +12% YoY
+                    </div>
+                    <div class="market-label">Median Price</div>
+                    <div class="mini-chart">
+                        <div class="chart-bar" style="height: 40%"></div>
+                        <div class="chart-bar" style="height: 55%"></div>
+                        <div class="chart-bar" style="height: 70%"></div>
+                        <div class="chart-bar" style="height: 85%"></div>
+                        <div class="chart-bar" style="height: 100%"></div>
+                    </div>
                 </div>
-                <div class="market-card">
+
+                <div class="market-card glass-dark">
                     <div class="market-value">34</div>
-                    <div class="market-trend negative">↓8%</div>
-                    <div class="market-label">Avg Days on Market</div>
+                    <div class="market-trend negative">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 14L8 2M8 14L13 9M8 14L3 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        -8% YoY
+                    </div>
+                    <div class="market-label">Days on Market</div>
+                    <div class="mini-chart">
+                        <div class="chart-bar" style="height: 100%"></div>
+                        <div class="chart-bar" style="height: 85%"></div>
+                        <div class="chart-bar" style="height: 70%"></div>
+                        <div class="chart-bar" style="height: 60%"></div>
+                        <div class="chart-bar" style="height: 50%"></div>
+                    </div>
                 </div>
-                <div class="market-card">
+
+                <div class="market-card glass-dark">
                     <div class="market-value">156</div>
-                    <div class="market-trend negative">-15%</div>
-                    <div class="market-label">Active Sarasota Listings</div>
+                    <div class="market-trend negative">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 14L8 2M8 14L13 9M8 14L3 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        -15% YoY
+                    </div>
+                    <div class="market-label">Active Listings</div>
+                    <div class="mini-chart">
+                        <div class="chart-bar" style="height: 90%"></div>
+                        <div class="chart-bar" style="height: 75%"></div>
+                        <div class="chart-bar" style="height: 65%"></div>
+                        <div class="chart-bar" style="height: 55%"></div>
+                        <div class="chart-bar" style="height: 50%"></div>
+                    </div>
                 </div>
             </div>
-            <div class="market-chart">
-                <canvas id="marketChart"></canvas>
-            </div>
-            <div class="market-cta">
-                <button class="btn btn-outline">Get Full Report</button>
+
+            <!-- CTA -->
+            <div class="section-cta reveal">
+                <button class="btn btn-outline-light" id="marketReportBtn">Get Full Market Report →</button>
             </div>
         </div>
     </section>
 
-    <!-- Process Section -->
+    <!-- ================================
+         SERVICES / WHAT WE OFFER
+         ================================ -->
+    <section class="services">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">WHAT WE OFFER</span>
+                <h2 class="section-title">Comprehensive Real Estate Solutions</h2>
+                <p class="section-subtitle">From first-time buyers to luxury investors, we guide every step.</p>
+            </div>
+
+            <div class="services-grid reveal-stagger">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <path d="M5 35L35 5M35 5H15M35 5V25" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Property Sales</h3>
+                    <p class="service-description">Strategic marketing and pricing to maximize your home's value.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <path d="M20 5C20 5 8 10 8 20V28C8 28 13 35 20 35C27 35 32 28 32 28V20C32 10 20 5 20 5Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Buyer Representation</h3>
+                    <p class="service-description">Personalized guidance from search to closing.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <rect x="8" y="12" width="10" height="20" stroke="currentColor" stroke-width="2.5"/>
+                            <rect x="22" y="8" width="10" height="24" stroke="currentColor" stroke-width="2.5"/>
+                            <path d="M8 32H32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Investment Consulting</h3>
+                    <p class="service-description">Data-driven insights for portfolio growth.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <path d="M5 25L15 15L23 23L35 11" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="15" cy="15" r="2" fill="currentColor"/>
+                            <circle cx="23" cy="23" r="2" fill="currentColor"/>
+                            <circle cx="35" cy="11" r="2" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Market Analysis</h3>
+                    <p class="service-description">Comprehensive reports for informed decisions.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <path d="M20 8L10 18H16V30H24V18H30L20 8Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Relocation Services</h3>
+                    <p class="service-description">Seamless transitions to Sarasota living.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <rect x="6" y="6" width="28" height="28" stroke="currentColor" stroke-width="2.5"/>
+                            <path d="M6 14H34M14 6V34M20 20H28M20 26H26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">New Construction</h3>
+                    <p class="service-description">Navigate builder contracts and inspections.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+         PROCESS TIMELINE - Horizontal Steps
+         ================================ -->
     <section class="process" id="process">
         <div class="container">
-            <span class="section-label">Our Process</span>
-            <div class="process-grid">
-                <div class="process-step">
-                    <div class="step-number">01</div>
-                    <div class="step-icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <path d="M5 35L35 5M35 5H15M35 5V25" stroke="#1A1A1A" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h3 class="step-title">Consult</h3>
-                    <p class="step-description">Data-driven pricing analysis</p>
-                </div>
+            <div class="section-header reveal">
+                <span class="section-label">OUR PROCESS</span>
+                <h2 class="section-title">Your Journey to Home, Simplified</h2>
+            </div>
 
-                <div class="process-step">
-                    <div class="step-number">02</div>
-                    <div class="step-icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <rect x="8" y="8" width="24" height="24" stroke="#1A1A1A" stroke-width="2"/>
-                            <path d="M8 14H32M14 8V32" stroke="#1A1A1A" stroke-width="2"/>
-                        </svg>
+            <div class="timeline reveal">
+                <div class="timeline-line"></div>
+                <div class="timeline-steps">
+                    <div class="timeline-step">
+                        <div class="step-circle">
+                            <span class="step-num">1</span>
+                        </div>
+                        <div class="step-content glass">
+                            <h3 class="step-title">Consult</h3>
+                            <p class="step-desc">Data-driven pricing analysis</p>
+                        </div>
                     </div>
-                    <h3 class="step-title">Prepare</h3>
-                    <p class="step-description">Strategic staging & marketing</p>
-                </div>
 
-                <div class="process-step">
-                    <div class="step-number">03</div>
-                    <div class="step-icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <circle cx="20" cy="20" r="12" stroke="#1A1A1A" stroke-width="2"/>
-                            <circle cx="20" cy="20" r="4" fill="#1A1A1A"/>
-                        </svg>
+                    <div class="timeline-step">
+                        <div class="step-circle">
+                            <span class="step-num">2</span>
+                        </div>
+                        <div class="step-content glass">
+                            <h3 class="step-title">Prepare</h3>
+                            <p class="step-desc">Strategic staging & marketing</p>
+                        </div>
                     </div>
-                    <h3 class="step-title">Market</h3>
-                    <p class="step-description">Targeted exposure to qualified buyers</p>
-                </div>
 
-                <div class="process-step">
-                    <div class="step-number">04</div>
-                    <div class="step-icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <path d="M10 20L18 28L30 12" stroke="#1A1A1A" stroke-width="2"/>
-                        </svg>
+                    <div class="timeline-step">
+                        <div class="step-circle">
+                            <span class="step-num">3</span>
+                        </div>
+                        <div class="step-content glass">
+                            <h3 class="step-title">Market</h3>
+                            <p class="step-desc">Targeted exposure to qualified buyers</p>
+                        </div>
                     </div>
-                    <h3 class="step-title">Close</h3>
-                    <p class="step-description">Expert negotiation & seamless transaction</p>
+
+                    <div class="timeline-step">
+                        <div class="step-circle">
+                            <span class="step-num">4</span>
+                        </div>
+                        <div class="step-content glass">
+                            <h3 class="step-title">Close</h3>
+                            <p class="step-desc">Expert negotiation & seamless transaction</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="process-line"></div>
         </div>
     </section>
 
-    <!-- Reviews Section -->
-    <section class="reviews">
+    <!-- ================================
+         TESTIMONIALS - Carousel
+         ================================ -->
+    <section class="testimonials">
         <div class="container">
-            <div class="reviews-carousel">
-                <div class="review-item active">
-                    <div class="quote-mark">"</div>
-                    <blockquote class="review-quote">Brandi and her team did a great job. Things happened fast, we were kept informed and the process went smoothly.</blockquote>
-                    <div class="review-stars">☆☆☆☆☆</div>
-                    <cite class="review-attribution">— Client, Sarasota Home Sale</cite>
-                </div>
-                <div class="review-item">
-                    <div class="quote-mark">"</div>
-                    <blockquote class="review-quote">Professional, knowledgeable, and responsive. The Furlan Group exceeded our expectations in every way.</blockquote>
-                    <div class="review-stars">☆☆☆☆☆</div>
-                    <cite class="review-attribution">— Client, Venice Property Purchase</cite>
-                </div>
-                <div class="review-item">
-                    <div class="quote-mark">"</div>
-                    <blockquote class="review-quote">Data-driven approach made all the difference. We sold above asking price in just two weeks.</blockquote>
-                    <div class="review-stars">☆☆☆☆☆</div>
-                    <cite class="review-attribution">— Client, Luxury Home Sale</cite>
-                </div>
+            <div class="section-header reveal">
+                <span class="section-label">CLIENT STORIES</span>
+                <h2 class="section-title">Trusted by Hundreds, Loved by All</h2>
             </div>
-            <div class="carousel-dots">
-                <span class="dot active" data-slide="0"></span>
-                <span class="dot" data-slide="1"></span>
-                <span class="dot" data-slide="2"></span>
+
+            <div class="testimonial-carousel">
+                <div class="testimonial-track">
+                    <div class="testimonial-card active glass">
+                        <div class="quote-mark">"</div>
+                        <blockquote class="testimonial-quote">
+                            Brandi and her team did a great job. Things happened fast, we were kept informed, and the process went smoothly. Extremely pleased.
+                        </blockquote>
+                        <div class="testimonial-rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">M</div>
+                            <div class="author-info">
+                                <div class="author-name">Michael R.</div>
+                                <div class="author-title">Sarasota Home Sale</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card glass">
+                        <div class="quote-mark">"</div>
+                        <blockquote class="testimonial-quote">
+                            Technically skilled, efficient, and friendly — qualities that are hard to find together in one team.
+                        </blockquote>
+                        <div class="testimonial-rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">S</div>
+                            <div class="author-info">
+                                <div class="author-name">Sarah K.</div>
+                                <div class="author-title">Venice Property Purchase</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card glass">
+                        <div class="quote-mark">"</div>
+                        <blockquote class="testimonial-quote">
+                            They're not just realtors — they're storytellers, creating the next chapter of your life.
+                        </blockquote>
+                        <div class="testimonial-rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">J</div>
+                            <div class="author-info">
+                                <div class="author-name">Jennifer T.</div>
+                                <div class="author-title">Luxury Home Buyer</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card glass">
+                        <div class="quote-mark">"</div>
+                        <blockquote class="testimonial-quote">
+                            The Furlan Group exceeded every expectation. Professional, knowledgeable, and genuinely cared about our needs.
+                        </blockquote>
+                        <div class="testimonial-rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">D</div>
+                            <div class="author-info">
+                                <div class="author-name">David & Lisa M.</div>
+                                <div class="author-title">First-Time Buyers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" id="prevTestimonial" aria-label="Previous testimonial">‹</button>
+                    <div class="carousel-dots" id="testimonialDots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
+                        <span class="dot" data-index="3"></span>
+                    </div>
+                    <button class="carousel-btn next" id="nextTestimonial" aria-label="Next testimonial">›</button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- ================================
+         FAQ ACCORDION
+         ================================ -->
     <section class="faq">
         <div class="container">
-            <span class="section-label">Frequently Asked Questions</span>
-            <div class="faq-list">
+            <div class="section-header reveal">
+                <span class="section-label">FREQUENTLY ASKED</span>
+                <h2 class="section-title">Your Questions, Answered</h2>
+            </div>
+
+            <div class="faq-list reveal-stagger">
                 <div class="faq-item">
                     <button class="faq-question">
                         <span>What is your team's experience in Sarasota luxury markets?</span>
@@ -315,120 +641,201 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>We leverage professional photography, drone videography, virtual staging, targeted digital advertising, and IDX integration across major real estate platforms. Our CRM system ensures immediate response to inquiries, while our analytics track engagement to refine our strategy in real-time.</p>
+                        <p>As part of Keller Williams powered by PLACE, we leverage professional photography, drone videography, virtual staging, 3D tours, targeted digital advertising across social media and major real estate platforms. Our CRM system ensures immediate response to inquiries, while our analytics track engagement to refine strategy in real-time.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>How does The Furlan Group structure benefit me as a client?</span>
+                        <span>How does The Furlan Group structure benefit clients?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Our team structure provides you with multiple points of expertise while maintaining Ken as your primary contact. You benefit from Brandi's 26 years of market knowledge, our collective network of buyers and sellers, and our coordinated approach to marketing and negotiation. It's personalized service backed by team resources.</p>
+                        <p>Our team structure provides multiple points of expertise while maintaining Ken as your primary contact. You benefit from Brandi's 26 years of market knowledge, our collective network of buyers and sellers, and our coordinated approach to marketing and negotiation. It's personalized service backed by team resources.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What areas do you serve in the Sarasota region?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We serve Sarasota, Venice, Nokomis, Bradenton, Longboat Key, Lakewood Ranch, and surrounding communities across Sarasota and Manatee counties. Our expertise spans luxury waterfront estates, single-family homes, condos, new construction, and investment properties.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What makes Ken Anderson different from other agents?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ken brings a data-driven, no-nonsense approach to real estate without the typical Florida fanfare. As part of The Furlan Group, he combines cutting-edge PLACE technology with personalized attention, transparent communication, and strategic market positioning. You get precision, professionalism, and results.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- ================================
+         CONTACT SECTION - Split Screen
+         ================================ -->
     <section class="contact" id="contact">
         <div class="container">
             <div class="contact-grid">
-                <div class="contact-form-wrapper">
-                    <h2 class="contact-title">Let's discuss your property goals.</h2>
+                <!-- Left: Form -->
+                <div class="contact-form-wrapper reveal">
+                    <h2 class="contact-title">Let's Discuss Your Property Goals</h2>
+                    <p class="contact-subtitle">Whether you're buying, selling, or investing — we're here to help.</p>
+
                     <form class="contact-form" id="contactForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" name="name" placeholder="Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" name="email" placeholder="Email" required>
-                            </div>
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Email" required>
                         </div>
                         <div class="form-group">
                             <input type="tel" name="phone" placeholder="Phone">
                         </div>
                         <div class="form-group">
-                            <select name="interest">
-                                <option value="">I'm interested in...</option>
+                            <select name="interest" required>
+                                <option value="">Interest</option>
                                 <option value="buying">Buying a Property</option>
                                 <option value="selling">Selling a Property</option>
                                 <option value="both">Both Buying & Selling</option>
-                                <option value="valuation">Home Valuation</option>
-                                <option value="consultation">General Consultation</option>
+                                <option value="investing">Investment Opportunities</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea name="message" placeholder="Message" rows="4"></textarea>
+                            <textarea name="message" placeholder="Message (optional)" rows="4"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Schedule Consultation</button>
                         <p class="form-microcopy">Average response time: 2 hours</p>
                     </form>
                 </div>
-                <div class="contact-info">
-                    <div class="info-item">
-                        <span class="info-label">Phone</span>
-                        <a href="tel:9412179417" class="info-value info-phone">(941) 217-9417</a>
+
+                <!-- Right: Info + Photo -->
+                <div class="contact-info reveal">
+                    <div class="contact-photo">
+                        <img src="images/ken-anderson.jpg" alt="Ken Anderson - Contact" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Ccircle fill=%22%23B8860B%22 cx=%22200%22 cy=%22200%22 r=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2248%22 fill=%22%23FAFAFA%22%3EKA%3C/text%3E%3C/svg%3E'">
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Email</span>
-                        <a href="mailto:Ken@furlangroup.com" class="info-value">Ken@furlangroup.com</a>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Office</span>
-                        <p class="info-value">2001 Siesta Drive, Suite 202<br>Sarasota, FL</p>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Hours</span>
-                        <p class="info-value info-hours">By appointment</p>
+
+                    <div class="contact-details">
+                        <h3 class="contact-name">Ken Anderson</h3>
+                        <p class="contact-role">Realtor, The Furlan Group<br>Keller Williams Coastal Living III</p>
+
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M2 4L8 10L2 16M7 4L13 10L7 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <a href="tel:9412179417">(941) 217-9417</a>
+                        </div>
+
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M2 6L10 11L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <a href="mailto:Ken@furlangroup.com">Ken@furlangroup.com</a>
+                        </div>
+
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 9C11.1046 9 12 8.10457 12 7C12 5.89543 11.1046 5 10 5C8.89543 5 8 5.89543 8 7C8 8.10457 8.89543 9 10 9Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M10 18C10 18 16 13 16 8C16 4.68629 13.3137 2 10 2C6.68629 2 4 4.68629 4 8C4 13 10 18 10 18Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>2001 Siesta Drive, Suite 202<br>Sarasota, FL 34239</span>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="#" aria-label="Instagram" class="social-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="#" aria-label="Facebook" class="social-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M18 2H15C13.6739 2 12.4021 2.52678 11.4645 3.46447C10.5268 4.40215 10 5.67392 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18V2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <a href="#" aria-label="LinkedIn" class="social-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <p class="contact-hours">Hours: By Appointment</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ================================
+         FOOTER
+         ================================ -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="footer-logo">KEN ANDERSON</div>
+                    <p class="footer-subtitle">REALTOR</p>
                     <p class="footer-tagline">Sarasota Real Estate. Refined.</p>
                 </div>
+
                 <div class="footer-links">
                     <div class="footer-column">
-                        <h4>Properties</h4>
+                        <h4>Navigation</h4>
                         <ul>
-                            <li><a href="#properties">Current Listings</a></li>
-                            <li><a href="#market">Market Data</a></li>
-                            <li><a href="#">Sold Properties</a></li>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#properties">Properties</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#market">Market</a></li>
+                            <li><a href="#contact">Contact</a></li>
                         </ul>
                     </div>
+
                     <div class="footer-column">
-                        <h4>Resources</h4>
+                        <h4>Services</h4>
                         <ul>
-                            <li><a href="#about">About The Team</a></li>
-                            <li><a href="#process">Our Process</a></li>
-                            <li><a href="#">Market Reports</a></li>
+                            <li><a href="#contact">Buyer Representation</a></li>
+                            <li><a href="#contact">Seller Representation</a></li>
+                            <li><a href="#contact">Investment Consulting</a></li>
+                            <li><a href="#contact">Relocation Services</a></li>
                         </ul>
                     </div>
+
                     <div class="footer-column">
-                        <h4>Connect</h4>
+                        <h4>Contact</h4>
                         <ul>
-                            <li><a href="#contact">Schedule Consultation</a></li>
                             <li><a href="tel:9412179417">(941) 217-9417</a></li>
                             <li><a href="mailto:Ken@furlangroup.com">Ken@furlangroup.com</a></li>
+                            <li><a href="https://maps.google.com/?q=2001+Siesta+Drive+Suite+202+Sarasota+FL" target="_blank">2001 Siesta Dr #202<br>Sarasota, FL 34239</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <div class="footer-legal">
-                    <p>&copy; 2025 Ken Anderson | The Furlan Group | Keller Williams Coastal Living III</p>
-                    <p class="footer-disclaimer">Equal Housing Opportunity</p>
+
+            <div class="footer-partners">
+                <div class="partner-logo kw-logo">
+                    <img src="images/kw-logo.png" alt="Keller Williams" onerror="this.parentElement.innerHTML='<span style=color:#999;font-size:12px;>KELLER WILLIAMS</span>'">
                 </div>
+                <div class="partner-text">
+                    <span class="equal-housing">⌂ Equal Housing Opportunity</span>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ken Anderson Real Estate. All rights reserved.</p>
+                <p>Powered by The Furlan Group | Keller Williams Coastal Living III</p>
             </div>
         </div>
     </footer>
