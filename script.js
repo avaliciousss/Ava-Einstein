@@ -1,13 +1,16 @@
-// ================================
-// GLOBAL VARIABLES
-// ================================
-let currentReviewIndex = 0;
-let reviewInterval;
+/**
+ * KEN ANDERSON REAL ESTATE WEBSITE
+ * Sophisticated JavaScript for Animations & Interactions
+ */
 
 // ================================
 // UTILITY FUNCTIONS
 // ================================
-const debounce = (func, wait) => {
+
+/**
+ * Debounce function for performance optimization
+ */
+function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
         const later = () => {
@@ -17,558 +20,616 @@ const debounce = (func, wait) => {
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
     };
-};
+}
+
+/**
+ * Check if element is in viewport
+ */
+function isInViewport(element, offset = 0) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) - offset &&
+        rect.bottom >= 0
+    );
+}
 
 // ================================
 // NAVIGATION
 // ================================
-const navbar = document.querySelector('.navbar');
-const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-const navMenu = document.querySelector('.nav-menu');
-const navLinks = document.querySelectorAll('.nav-menu a');
 
-// Navbar scroll effect
-const handleNavbarScroll = () => {
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-};
+/**
+ * Sticky navigation with scroll effect
+ */
+function initNavigation() {
+    const navbar = document.getElementById('navbar');
+    const navMenu = document.getElementById('navMenu');
+    const mobileToggle = document.getElementById('mobileToggle');
 
-window.addEventListener('scroll', debounce(handleNavbarScroll, 10));
+    // Scroll effect
+    let lastScroll = 0;
+    window.addEventListener('scroll', debounce(() => {
+        const currentScroll = window.pageYOffset;
 
-// Mobile menu toggle
-if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        mobileMenuToggle.classList.toggle('active');
-    });
-}
-
-// Close mobile menu when link is clicked
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        mobileMenuToggle.classList.remove('active');
-    });
-});
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offsetTop = target.offsetTop - 80;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// ================================
-// SEARCH BAR FUNCTIONALITY
-// ================================
-const searchInput = document.querySelector('.search-input');
-const searchButton = document.querySelector('.search-button');
-
-if (searchButton) {
-    searchButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        const searchValue = searchInput.value.trim();
-        if (searchValue) {
-            console.log('Searching for:', searchValue);
-            // In production, this would redirect to a search results page or trigger a search
-            alert(`Searching for properties in: ${searchValue}`);
-        }
-    });
-}
-
-if (searchInput) {
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            searchButton.click();
-        }
-    });
-}
-
-// ================================
-// SCROLL ANIMATIONS
-// ================================
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, observerOptions);
-
-// Observe sections for scroll animations
-document.querySelectorAll('.about, .listings, .market, .process, .reviews, .faq, .contact').forEach(section => {
-    section.classList.add('fade-in-on-scroll');
-    observer.observe(section);
-});
-
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const heroBackground = document.querySelector('.hero-background');
-    if (heroBackground) {
-        heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
-
-// ================================
-// LISTING CARDS HOVER EFFECT
-// ================================
-const listingCards = document.querySelectorAll('.listing-card');
-
-listingCards.forEach(card => {
-    card.addEventListener('mouseenter', function(e) {
-        this.style.transform = 'translateY(-8px) scale(1.02)';
-    });
-
-    card.addEventListener('mouseleave', function(e) {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
-
-    // Add tilt effect on mouse move
-    card.addEventListener('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-
-        this.style.transform = `translateY(-8px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-});
-
-// ================================
-// MARKET CHART
-// ================================
-const createMarketChart = () => {
-    const canvas = document.getElementById('marketChart');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    canvas.width = canvas.offsetWidth;
-    canvas.height = 300;
-
-    const data = [650, 680, 720, 740, 760, 775, 790, 785, 775, 770, 775, 775];
-    const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-    const padding = 40;
-    const chartWidth = canvas.width - padding * 2;
-    const chartHeight = canvas.height - padding * 2;
-
-    const maxValue = Math.max(...data);
-    const minValue = Math.min(...data);
-    const valueRange = maxValue - minValue;
-
-    const pointSpacing = chartWidth / (data.length - 1);
-
-    // Draw grid lines
-    ctx.strokeStyle = 'rgba(138, 154, 123, 0.1)';
-    ctx.lineWidth = 1;
-    for (let i = 0; i <= 5; i++) {
-        const y = padding + (chartHeight / 5) * i;
-        ctx.beginPath();
-        ctx.moveTo(padding, y);
-        ctx.lineTo(canvas.width - padding, y);
-        ctx.stroke();
-    }
-
-    // Draw line
-    ctx.strokeStyle = '#B85C38';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-
-    data.forEach((value, index) => {
-        const x = padding + index * pointSpacing;
-        const y = padding + chartHeight - ((value - minValue) / valueRange) * chartHeight;
-
-        if (index === 0) {
-            ctx.moveTo(x, y);
+        if (currentScroll > 50) {
+            navbar.classList.add('scrolled');
         } else {
-            ctx.lineTo(x, y);
+            navbar.classList.remove('scrolled');
         }
+
+        lastScroll = currentScroll;
+    }, 10));
+
+    // Mobile menu toggle
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileToggle.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileToggle.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navbar.contains(e.target)) {
+                navMenu.classList.remove('active');
+                mobileToggle.classList.remove('active');
+            }
+        });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offset = 80; // Navbar height
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
-
-    ctx.stroke();
-
-    // Draw area fill
-    ctx.lineTo(canvas.width - padding, canvas.height - padding);
-    ctx.lineTo(padding, canvas.height - padding);
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(184, 92, 56, 0.1)';
-    ctx.fill();
-
-    // Draw points
-    data.forEach((value, index) => {
-        const x = padding + index * pointSpacing;
-        const y = padding + chartHeight - ((value - minValue) / valueRange) * chartHeight;
-
-        ctx.beginPath();
-        ctx.arc(x, y, 5, 0, Math.PI * 2);
-        ctx.fillStyle = '#B85C38';
-        ctx.fill();
-        ctx.strokeStyle = '#FFFFFF';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-    });
-
-    // Draw labels
-    ctx.fillStyle = '#8A9A7B';
-    ctx.font = '12px Inter';
-    ctx.textAlign = 'center';
-
-    labels.forEach((label, index) => {
-        const x = padding + index * pointSpacing;
-        ctx.fillText(label, x, canvas.height - 15);
-    });
-};
+}
 
 // ================================
-// MARKET CARDS ANIMATION
+// STATISTICS COUNTER ANIMATION
 // ================================
-const animateMarketValues = () => {
-    const marketValues = document.querySelectorAll('.market-value');
 
-    marketValues.forEach(valueEl => {
-        const targetText = valueEl.textContent;
-        const targetValue = parseFloat(targetText.replace(/[^0-9.]/g, ''));
-        const suffix = targetText.replace(/[0-9.,]/g, '');
+/**
+ * Animate counting up for statistics
+ */
+function initStatCounters() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    let hasAnimated = false;
 
-        if (!isNaN(targetValue)) {
-            let currentValue = 0;
-            const increment = targetValue / 50;
+    const observerOptions = {
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasAnimated) {
+                hasAnimated = true;
+                animateCounters();
+            }
+        });
+    }, observerOptions);
+
+    if (statNumbers.length > 0) {
+        observer.observe(statNumbers[0].closest('.stats-bar'));
+    }
+
+    function animateCounters() {
+        statNumbers.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-target'));
+            const prefix = stat.getAttribute('data-prefix') || '';
+            const suffix = stat.getAttribute('data-suffix') || '';
+            const duration = 2000; // 2 seconds
+            const steps = 60;
+            const increment = target / steps;
+            let current = 0;
+            let step = 0;
+
             const timer = setInterval(() => {
-                currentValue += increment;
-                if (currentValue >= targetValue) {
-                    currentValue = targetValue;
+                step++;
+                current += increment;
+
+                if (step >= steps) {
                     clearInterval(timer);
+                    stat.textContent = prefix + target + suffix;
+                } else {
+                    stat.textContent = prefix + Math.floor(current) + suffix;
                 }
-                valueEl.textContent = Math.floor(currentValue) + suffix;
-            }, 30);
-        }
-    });
-};
-
-// Trigger market animation when section is visible
-const marketSection = document.querySelector('.market');
-if (marketSection) {
-    const marketObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateMarketValues();
-                createMarketChart();
-                marketObserver.unobserve(entry.target);
-            }
+            }, duration / steps);
         });
-    }, { threshold: 0.3 });
-
-    marketObserver.observe(marketSection);
+    }
 }
 
 // ================================
-// PROCESS STEP ANIMATIONS
+// SCROLL REVEAL ANIMATIONS
 // ================================
-const processSteps = document.querySelectorAll('.process-step');
 
-processSteps.forEach((step, index) => {
-    step.style.opacity = '0';
-    step.style.transform = 'translateY(30px)';
+/**
+ * Reveal elements on scroll
+ */
+function initScrollReveal() {
+    const revealElements = document.querySelectorAll('.reveal, .reveal-stagger');
 
-    const stepObserver = new IntersectionObserver((entries) => {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setTimeout(() => {
-                    step.style.transition = 'all 0.6s ease';
-                    step.style.opacity = '1';
-                    step.style.transform = 'translateY(0)';
-                }, index * 150);
-                stepObserver.unobserve(entry.target);
+                entry.target.classList.add('visible');
             }
         });
-    }, { threshold: 0.3 });
+    }, observerOptions);
 
-    stepObserver.observe(step);
-});
-
-// ================================
-// REVIEWS CAROUSEL
-// ================================
-const reviewItems = document.querySelectorAll('.review-item');
-const dots = document.querySelectorAll('.carousel-dots .dot');
-
-const showReview = (index) => {
-    reviewItems.forEach((item, i) => {
-        item.classList.remove('active');
-        if (i === index) {
-            item.classList.add('active');
-        }
-    });
-
-    dots.forEach((dot, i) => {
-        dot.classList.remove('active');
-        if (i === index) {
-            dot.classList.add('active');
-        }
-    });
-};
-
-const nextReview = () => {
-    currentReviewIndex = (currentReviewIndex + 1) % reviewItems.length;
-    showReview(currentReviewIndex);
-};
-
-const startReviewCarousel = () => {
-    reviewInterval = setInterval(nextReview, 5000);
-};
-
-const stopReviewCarousel = () => {
-    clearInterval(reviewInterval);
-};
-
-// Dot click handlers
-dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-        currentReviewIndex = index;
-        showReview(currentReviewIndex);
-        stopReviewCarousel();
-        startReviewCarousel();
-    });
-});
-
-// Start carousel
-if (reviewItems.length > 0) {
-    showReview(0);
-    startReviewCarousel();
+    revealElements.forEach(el => observer.observe(el));
 }
 
-// Pause carousel on hover
-const reviewsSection = document.querySelector('.reviews-carousel');
-if (reviewsSection) {
-    reviewsSection.addEventListener('mouseenter', stopReviewCarousel);
-    reviewsSection.addEventListener('mouseleave', startReviewCarousel);
+// ================================
+// TESTIMONIAL CAROUSEL
+// ================================
+
+/**
+ * Testimonial carousel functionality
+ */
+function initTestimonialCarousel() {
+    const cards = document.querySelectorAll('.testimonial-card');
+    const dots = document.querySelectorAll('#testimonialDots .dot');
+    const prevBtn = document.getElementById('prevTestimonial');
+    const nextBtn = document.getElementById('nextTestimonial');
+    let currentIndex = 0;
+    let autoplayInterval;
+
+    if (cards.length === 0) return;
+
+    function showSlide(index) {
+        // Remove active class from all
+        cards.forEach(card => card.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        // Add active class to current
+        cards[index].classList.add('active');
+        dots[index].classList.add('active');
+
+        currentIndex = index;
+    }
+
+    function nextSlide() {
+        const next = (currentIndex + 1) % cards.length;
+        showSlide(next);
+    }
+
+    function prevSlide() {
+        const prev = (currentIndex - 1 + cards.length) % cards.length;
+        showSlide(prev);
+    }
+
+    function startAutoplay() {
+        autoplayInterval = setInterval(nextSlide, 5000);
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+    }
+
+    // Event listeners
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            stopAutoplay();
+            nextSlide();
+            startAutoplay();
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            stopAutoplay();
+            prevSlide();
+            startAutoplay();
+        });
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            stopAutoplay();
+            showSlide(index);
+            startAutoplay();
+        });
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const carousel = document.querySelector('.testimonial-carousel');
+    if (carousel) {
+        carousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        carousel.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                stopAutoplay();
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+                startAutoplay();
+            }
+        }
+    }
+
+    // Start autoplay
+    startAutoplay();
+
+    // Pause on hover
+    if (carousel) {
+        carousel.addEventListener('mouseenter', stopAutoplay);
+        carousel.addEventListener('mouseleave', startAutoplay);
+    }
 }
 
 // ================================
 // FAQ ACCORDION
 // ================================
-const faqItems = document.querySelectorAll('.faq-item');
 
-faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
+/**
+ * FAQ accordion functionality
+ */
+function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
 
-    question.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
 
-        // Close all FAQ items
-        faqItems.forEach(faqItem => {
-            faqItem.classList.remove('active');
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+
+            // Close all FAQs
+            faqItems.forEach(faq => {
+                faq.classList.remove('active');
+            });
+
+            // Toggle current FAQ
+            if (!isActive) {
+                item.classList.add('active');
+            }
         });
-
-        // Open clicked item if it wasn't already open
-        if (!isActive) {
-            item.classList.add('active');
-        }
-    });
-});
-
-// ================================
-// CONTACT FORM
-// ================================
-const contactForm = document.getElementById('contactForm');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(contactForm);
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-
-        console.log('Form submitted:', data);
-
-        // Show success message
-        alert('Thank you for your inquiry! We will respond within 2 hours.');
-
-        // Reset form
-        contactForm.reset();
-
-        // In production, this would send data to a server or CRM
-        // Example:
-        // fetch('/api/contact', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(data)
-        // }).then(response => response.json())
-        //   .then(data => console.log('Success:', data))
-        //   .catch(error => console.error('Error:', error));
     });
 }
 
 // ================================
-// FORM INPUT ANIMATIONS
+// FORM HANDLING
 // ================================
-const formInputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
 
-formInputs.forEach(input => {
-    input.addEventListener('focus', function() {
-        this.parentElement.classList.add('focused');
-    });
+/**
+ * Contact form handling
+ */
+function initContactForm() {
+    const form = document.getElementById('contactForm');
 
-    input.addEventListener('blur', function() {
-        if (!this.value) {
-            this.parentElement.classList.remove('focused');
-        }
-    });
-});
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-// ================================
-// CURSOR TRAIL EFFECT (OPTIONAL SUBTLE INTERACTION)
-// ================================
-let mouseX = 0;
-let mouseY = 0;
-let cursorX = 0;
-let cursorY = 0;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
 
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-});
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
 
-// ================================
-// PAGE LOAD ANIMATIONS
-// ================================
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
+            // Get form data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
 
-    // Trigger initial animations
-    setTimeout(() => {
-        const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .search-bar, .hero-ctas, .scroll-indicator');
-        heroElements.forEach((element, index) => {
-            setTimeout(() => {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }, index * 100);
+            // Simulate form submission (replace with actual API call)
+            try {
+                // Simulate API delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                // Log form data (for development)
+                console.log('Form submitted:', data);
+
+                // Show success message
+                showFormMessage(form, 'success', 'Thank you! We\'ll be in touch within 2 hours.');
+
+                // Reset form
+                form.reset();
+
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+
+            } catch (error) {
+                console.error('Form submission error:', error);
+
+                // Show error message
+                showFormMessage(form, 'error', 'Something went wrong. Please try again or call (941) 217-9417.');
+
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
         });
-    }, 100);
-});
-
-// ================================
-// RESIZE HANDLER
-// ================================
-let resizeTimer;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-        createMarketChart();
-    }, 250);
-});
-
-// ================================
-// SMOOTH REVEAL ON SCROLL
-// ================================
-const revealElements = document.querySelectorAll('.listing-card, .market-card, .process-step');
-
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
-            revealObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.1 });
-
-revealElements.forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(30px)';
-    element.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-    revealObserver.observe(element);
-});
-
-// ================================
-// EASTER EGG: KONAMI CODE
-// ================================
-const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-let konamiIndex = 0;
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === konamiCode[konamiIndex]) {
-        konamiIndex++;
-        if (konamiIndex === konamiCode.length) {
-            console.log('🏠 Ken Anderson Realty - Built with precision and dedication!');
-            konamiIndex = 0;
-        }
-    } else {
-        konamiIndex = 0;
     }
-});
+
+    // Search bar functionality
+    const searchButton = document.querySelector('.search-button');
+    const searchInput = document.querySelector('.search-input');
+
+    if (searchButton && searchInput) {
+        searchButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (searchInput.value.trim()) {
+                console.log('Search query:', searchInput.value);
+                // Scroll to properties section
+                const propertiesSection = document.getElementById('properties');
+                if (propertiesSection) {
+                    propertiesSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                searchButton.click();
+            }
+        });
+    }
+}
+
+/**
+ * Show form submission message
+ */
+function showFormMessage(form, type, message) {
+    // Remove existing message
+    const existingMessage = form.querySelector('.form-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
+    // Create message element
+    const messageEl = document.createElement('div');
+    messageEl.className = `form-message form-message-${type}`;
+    messageEl.textContent = message;
+    messageEl.style.cssText = `
+        padding: 16px;
+        margin-top: 16px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 600;
+        background-color: ${type === 'success' ? '#00FF88' : '#FF6B6B'};
+        color: ${type === 'success' ? '#0A0A0A' : '#FFFFFF'};
+        animation: fadeInUp 0.5s ease;
+    `;
+
+    form.appendChild(messageEl);
+
+    // Remove message after 5 seconds
+    setTimeout(() => {
+        messageEl.style.opacity = '0';
+        messageEl.style.transform = 'translateY(-20px)';
+        messageEl.style.transition = 'all 0.5s ease';
+        setTimeout(() => messageEl.remove(), 500);
+    }, 5000);
+}
+
+// ================================
+// MARKET REPORT BUTTON
+// ================================
+
+/**
+ * Market report button functionality
+ */
+function initMarketReport() {
+    const marketReportBtn = document.getElementById('marketReportBtn');
+
+    if (marketReportBtn) {
+        marketReportBtn.addEventListener('click', () => {
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+
+                // Pre-fill the interest dropdown
+                setTimeout(() => {
+                    const interestSelect = document.querySelector('select[name="interest"]');
+                    if (interestSelect) {
+                        // Find or create market report option
+                        let reportOption = Array.from(interestSelect.options).find(
+                            opt => opt.value === 'market-report'
+                        );
+
+                        if (!reportOption) {
+                            const newOption = document.createElement('option');
+                            newOption.value = 'market-report';
+                            newOption.textContent = 'Request Market Report';
+                            interestSelect.appendChild(newOption);
+                        }
+
+                        interestSelect.value = 'market-report';
+                    }
+                }, 800);
+            }
+        });
+    }
+}
+
+// ================================
+// PARALLAX EFFECTS
+// ================================
+
+/**
+ * Simple parallax effect for hero section
+ */
+function initParallax() {
+    const heroBg = document.querySelector('.hero-bg-image');
+
+    if (heroBg) {
+        window.addEventListener('scroll', debounce(() => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * 0.3;
+            heroBg.style.transform = `translateY(${rate}px)`;
+        }, 10));
+    }
+}
+
+// ================================
+// PROPERTY CARDS INTERACTIONS
+// ================================
+
+/**
+ * Enhanced property card interactions
+ */
+function initPropertyCards() {
+    const propertyCards = document.querySelectorAll('.property-card');
+
+    propertyCards.forEach(card => {
+        // Handle click
+        card.addEventListener('click', function(e) {
+            // Don't trigger if clicking on a link
+            if (e.target.tagName === 'A') return;
+
+            // Get property details
+            const price = this.querySelector('.property-price')?.textContent;
+            const address = this.querySelector('.property-address')?.textContent;
+
+            console.log('Property clicked:', { price, address });
+
+            // You could open a modal with property details here
+            // or navigate to a dedicated property page
+        });
+    });
+}
+
+// ================================
+// ANIMATION ON LOAD
+// ================================
+
+/**
+ * Trigger animations on page load
+ */
+function initLoadAnimations() {
+    // Add a loaded class to body after a short delay
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 100);
+}
 
 // ================================
 // PERFORMANCE MONITORING
 // ================================
-if ('PerformanceObserver' in window) {
-    const observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-            if (entry.entryType === 'largest-contentful-paint') {
-                console.log('LCP:', entry.renderTime || entry.loadTime);
-            }
-        }
-    });
 
-    observer.observe({ entryTypes: ['largest-contentful-paint'] });
+/**
+ * Log performance metrics (optional)
+ */
+function monitorPerformance() {
+    if ('performance' in window) {
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const perfData = window.performance.timing;
+                const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+                const connectTime = perfData.responseEnd - perfData.requestStart;
+                const renderTime = perfData.domComplete - perfData.domLoading;
+
+                console.log('Performance Metrics:', {
+                    'Page Load Time': `${(pageLoadTime / 1000).toFixed(2)}s`,
+                    'Connect Time': `${(connectTime / 1000).toFixed(2)}s`,
+                    'Render Time': `${(renderTime / 1000).toFixed(2)}s`
+                });
+            }, 0);
+        });
+    }
 }
 
 // ================================
-// ANALYTICS (PLACEHOLDER)
+// EASTER EGGS & ENHANCEMENTS
 // ================================
-const trackEvent = (category, action, label) => {
-    // In production, integrate with Google Analytics, Facebook Pixel, etc.
-    console.log('Event tracked:', { category, action, label });
 
-    // Example GA4 tracking:
-    // gtag('event', action, {
-    //     'event_category': category,
-    //     'event_label': label
-    // });
-};
+/**
+ * Add subtle enhancements and easter eggs
+ */
+function initEnhancements() {
+    // Console greeting
+    console.log(
+        '%cKen Anderson Real Estate',
+        'font-size: 24px; font-weight: bold; color: #B8860B; font-family: "Playfair Display", serif;'
+    );
+    console.log(
+        '%cSarasota Real Estate. Refined.',
+        'font-size: 14px; color: #666; font-style: italic;'
+    );
+    console.log(
+        '%c(941) 217-9417 | Ken@furlangroup.com',
+        'font-size: 12px; color: #999;'
+    );
+}
 
-// Track listing card clicks
-listingCards.forEach((card, index) => {
-    card.addEventListener('click', () => {
-        trackEvent('Listings', 'View Property', `Property ${index + 1}`);
-    });
+// ================================
+// INITIALIZATION
+// ================================
+
+/**
+ * Initialize all functionality when DOM is ready
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Initializing Ken Anderson Real Estate Website...');
+
+    // Initialize all modules
+    initNavigation();
+    initStatCounters();
+    initScrollReveal();
+    initTestimonialCarousel();
+    initFAQ();
+    initContactForm();
+    initMarketReport();
+    initParallax();
+    initPropertyCards();
+    initLoadAnimations();
+    initEnhancements();
+
+    // Performance monitoring (optional, can be disabled in production)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        monitorPerformance();
+    }
+
+    console.log('✓ Website initialized successfully');
 });
 
-// Track CTA clicks
-document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        trackEvent('CTA', 'Click', e.target.textContent.trim());
-    });
-});
+// ================================
+// WINDOW RESIZE HANDLER
+// ================================
 
-console.log('%c🏠 Ken Anderson Realty', 'font-size: 20px; font-weight: bold; color: #B85C38;');
-console.log('%cSarasota Real Estate. Refined.', 'font-size: 14px; color: #8A9A7B; font-style: italic;');
+/**
+ * Handle window resize events
+ */
+window.addEventListener('resize', debounce(() => {
+    // Recalculate any position-dependent elements
+    // This is debounced for performance
+}, 250));
